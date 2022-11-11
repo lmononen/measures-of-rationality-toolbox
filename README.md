@@ -5,12 +5,13 @@ Matlab program for computing measures of rationality for consumer choice data us
 ## Table of Contents
 
 - [Background](#background)
-  - [Afriat's Efficiency Index](#afriats-efficiency-index)
-  - [Houtman-Maks Index](#houtman-maks-index)
-  - [Swaps Index](#swaps-index)
-  - [Varian's Goodness-of-Fit of degree α](#varians-goodness-of-fit-of-degree-alpha)
-  - [Inverse Varian's Goodness-of-Fit of degree α](#inverse-varians-goodness-of-fit-of-degree-alpha)
-  - [Normalized Minimum Cost Index of degree α](#normalized-minimum-cost-index-of-degree-alpha)
+  - [Measures of Rationality](#measures-of-rationality)
+    - [Afriat's Efficiency Index](#afriats-efficiency-index)
+    - [Houtman-Maks Index](#houtman-maks-index)
+    - [Swaps Index](#swaps-index)
+    - [Varian's Goodness-of-Fit of degree α](#varians-goodness-of-fit-of-degree-alpha)
+    - [Inverse Varian's Goodness-of-Fit of degree α](#inverse-varians-goodness-of-fit-of-degree-alpha)
+    - [Normalized Minimum Cost Index of degree α](#normalized-minimum-cost-index-of-degree-alpha)
   - [Measures of Rationality for Rationalization with Symmetric Utility](#measures-of-rationality-for-rationalization-with-symmetric-utility)
     - [Afriat's Efficiency Index with Symmetric Utility](#afriats-efficiency-index-with-symmetric-utility)
     - [Houtman-Maks Index with Symmetric Utility](#houtman-maks-index-with-symmetric-utility)
@@ -27,9 +28,9 @@ Matlab program for computing measures of rationality for consumer choice data us
 
 ## Background
 
-The observed consumer choice data consists of prices and bundles 
+The observed consumer choice data consists of $T$ observation of bundles and prices
 $$D=\big((p_1,x_1),\dotsc,(p_T,x_T)\big)$$
-where $p_i\in \mathbb{R}^G_{++}$ and $x_i\in \mathbb{R}^G_{+}$ for some number of goods $G$. 
+where $p_i\in \mathbb{R}^G_{++}$ and $x_i\in \mathbb{R}^G_{+}$ for the number of goods $G$. 
 
 The *revealed preference* is 
 $$x_{t}\mathrel{\operatorname{R}}x_{t^\prime}\iff p_t\cdot x_t\geq p_t\cdot x_{t^\prime}$$
@@ -37,12 +38,16 @@ $$x_{t}\mathrel{\operatorname{P}}x_{t^\prime}\iff p_t\cdot x_t   > p_t\cdot x_{t
 
 A revealed preference $(\operatorname{R},\operatorname{P})$ is *acyclical* if there does not exist a cycle $(t_1,\dotsc, t_n)$ such that for each $1\leq i \leq n-1$, $x_{t_i}\mathrel{\operatorname{R}}x_{t_{i+1}}$ and $x_{t_n}\mathrel{\operatorname{P}}x_{t_{1}}$.
 
-The data $D$ is *rationalizable* if there exist a non-satiated utility $u:\mathbb{R}^G_{+}\to\mathbb{R}$ that explains the choices as utility maximization subject to the budget constraint i.e. such that for each $t$ 
+The data $D$ is *rationalizable* if there exists a non-satiated utility $u:\mathbb{R}^G_{+}\to\mathbb{R}$ that explains the choices as maximizing the utility subject to the budget constraint i.e. such that for each $t$ 
 $$x_t\in \operatorname{arg\\,max}\\{ u(x)| x\cdot p_t \leq x_t\cdot p_t\\}.$$
 
-The data is rationalizable iff the revealed preference is $(\operatorname{R},\operatorname{P})$ is acyclical (Afriat, 1967).
+As is well known, the data is rationalizable iff the revealed preference $(\operatorname{R},\operatorname{P})$ is acyclical (Afriat, 1967).
 
-### Afriat's Efficiency Index
+### Measures of Rationality
+
+The measures of rationality capture how close the observed data is to being rationalizable. 
+
+#### Afriat's Efficiency Index
 
 For a common adjustment factor $e\in[0,1]$, define the relaxed revealed preference $(\operatorname{R}^{e},\operatorname{P}^{e})$ by for all 
 $$x_{t}\mathrel{\operatorname{R}^{e}}x_{t^\prime}\iff (1-e)p_t\cdot x_t\geq p_t\cdot x_{t^\prime}$$
@@ -51,17 +56,17 @@ $$x_{t}\mathrel{\operatorname{P}^{e}}x_{t^\prime}\iff (1-e)p_t\cdot x_t   > p_t\
 Afriat's efficiency index (1972) is 
 $$\inf_{e\in[0,1]}e\text{ such that }(\operatorname{R}^{e},\operatorname{P}^{e}) \text{ is acyclical.}$$
 
-### Houtman-Maks Index
+#### Houtman-Maks Index
 
 Houtman-Maks index (1985) is 
 $$\inf_{B\subseteq T}\frac{1}{T}|B|\text{ such that } (p_i,x_i)_{i\in\\{1,\dotsc, T\\}\setminus B}\text{ is rationalizable.}$$
 
-### Swaps Index
+#### Swaps Index
 
 Swaps index (Apesteguia & Ballester, 2015; Mononen, 2022) is 
 $$\inf_{B\subseteq \operatorname{R}}\frac{1}{T}|B|\text{ such that }(\operatorname{R}\setminus B,\operatorname{P}\setminus B)\text{ is acyclical.}$$
 
-### Varian's Goodness-of-Fit of Degree $\alpha$
+#### Varian's Goodness-of-Fit of Degree $\alpha$
 
 For an observation specific adjustment factors $(e_t)\in[0,1]^T$, define the relaxed revealed preference $(\operatorname{R}^{(e_t)},\operatorname{P}^{(e_t)})$ by for all 
 $$x_{t}\mathrel{\operatorname{R}^{(e_t)}}x_{t^\prime}\iff (1-e_t)p_t\cdot x_t\geq p_t\cdot x_{t^\prime}$$
@@ -70,7 +75,7 @@ $$x_{t}\mathrel{\operatorname{P}^{(e_t)}}x_{t^\prime}\iff (1-e_t)p_t\cdot x_t   
 Varian's goodness-of-fit of degree $\alpha$ (Varian, 1990; Mononen, 2022)  is 
 $$\inf_{e_t)\in[0,1]^T}\frac{1}{T}\sum_{t=1}^T e_t^\alpha\text{ such that }(\operatorname{R}^{(e_t)},\operatorname{P}^{(e_t)}) \text{ is acyclical.}$$
 
-### Inverse Varian's Goodness-of-Fit of Degree $\alpha$
+#### Inverse Varian's Goodness-of-Fit of Degree $\alpha$
 
 For an observation specific adjustment factors $(e_{t^\prime})\in[0,1]^T$, define the relaxed revealed preference $(\operatorname{R}^{(e_{t^\prime})},\operatorname{P}^{(e_{t^\prime})})$ by for all 
 $$x_{t}\mathrel{\operatorname{R}^{(e_{t^\prime})}}x_{t^\prime}\iff p_t\cdot x_t\geq (1-e_{t^\prime})p_t\cdot x_{t^\prime}$$
@@ -79,7 +84,7 @@ $$x_{t}\mathrel{\operatorname{P}^{(e_{t^\prime})}}x_{t^\prime}\iff p_t\cdot x_t 
 Inverse Varian's goodness-of-fit of degree $\alpha$ (Mononen, 2022) is 
 $$\inf_{(e_{t^\prime})\in[0,1]^T}\frac{1}{T}\sum_{t^\prime=1}^T e_{t^\prime}^\alpha\text{ such that }(\operatorname{R}^{(e_{t^\prime})},\operatorname{P}^{(e_{t^\prime})}) \text{ is acyclical.}$$
 
-### Normalized Minimum Cost Index of Degree $\alpha$
+#### Normalized Minimum Cost Index of Degree $\alpha$
 
 For a relation specific adjustment factors $(e_{t,t^\prime})\in[0,1]^{T\times T}$, define the relaxed revealed preference $(\operatorname{R}^{(e_{t,t^\prime})},\operatorname{P}^{(e_{t,t^\prime})})$ by for all 
 $$x_{t}\mathrel{\operatorname{R}^{(e_{t,t^\prime})}}x_{t^\prime}\iff p_t\cdot x_t\geq (1-e_{t,t^\prime})p_t\cdot x_{t^\prime}$$
@@ -104,7 +109,7 @@ Using these symmetrically extended revealed preferences and their acyclicality, 
 
 ####  Afriat's Efficiency Index with Symmetric Utility
 
-For a common adjustment factor $e\in[0,1]$, define the relaxed revealed preference $(\operatorname{R}^{e},\operatorname{P}^{e})$ by for all  $t, t^\prime$ and permutations $\pi$ as  
+For a common adjustment factor $e\in[0,1]$, define the relaxed revealed preference $(\operatorname{R_S}^{e},\operatorname{P_S}^{e})$ by for all  $t, t^\prime$ and permutations $\pi$ as  
 $$x_{t}\mathrel{\operatorname{R_S}}\pi(x_{t^\prime})\iff (1-e)p_t\cdot x_t\geq p_t\cdot \pi(x_{t^\prime})\text{ or } t=t^\prime$$
 $$x_{t}\mathrel{\operatorname{P_S}}\pi(x_{t^\prime})\iff (1-e)p_t\cdot x_t   > p_t\cdot \pi(x_{t^\prime}).$$
 
@@ -152,7 +157,7 @@ $$\inf_{(e_{t^\prime})\in[0,1]^T}\frac{1}{T}\sum_{t^\prime=1}^T e_{t,t^\prime}^\
 
 ### Statistical Significance of Rationality Measures
 
-Significance levels for violations of rationality are based on testing if the measure of rationality observed in the data could have been generated by a person choosing randomly on the budget line. Formally, for a number of goods $G$ and prices $p_t$ denote the income $w_t=p_t\cdot x_t$ and the budget line 
+The significance levels for violations of rationality are based on testing if the measure of rationality observed in the data could have been generated by a person choosing randomly on the budget line. Formally, for a number of goods $G$ and prices $p_t$ denote the income $w_t=p_t\cdot x_t$ and the budget line 
 $$B(p_t,w_t)=\\{x\in \mathbb{R}_{+}^G| p_t \cdot x=w_t\\}.$$
 For a measure of rationality $I$, we are testing the null hypothesis with one-sided tests
 $$H_0: I\big((p_1,x_1),\dotsc, (p_T,x_T)\big)\sim I\big((p_1,\operatorname{Uni}(B(p_1,w_1))),\dotsc, (p_T,\operatorname{Uni}(B(p_T,w_T)))\big).$$
