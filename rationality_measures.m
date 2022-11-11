@@ -21,7 +21,7 @@ function values_vec = rationality_measures(P,Q, power_vec)
 %   values_vec(1): Afriat's index: The smallaest e such that after adjusting 
 %   all the incomes to (1-e)*income, the revealed preferences satisfy GARP. 
 
-%   values_vec(2): Houthman-Maks index: The minimum fraction of observation 
+%   values_vec(2): Houtman-Maks index: The minimum fraction of observation 
 %   needed to remove so that the observed data satisfy GARP. 
 
 %   values_vec(3): Swaps index: The smallest number of revealed preferences 
