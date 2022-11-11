@@ -14,7 +14,7 @@
 % two assets. This is equivalent to rationalization by a symmetric
 % utility function over these two assets. 
 
-% Include the Rationality_Measures folder and all the subfolders to the path
+% Include the main folder and all the subfolders to the path
 addpath(genpath('../')) 
 
 % Columns are observations and rows are goods

@@ -9,7 +9,7 @@
 % x_1=(1,2), x_2=(2,1), x_3 = (2,2)
 % p_1=(1,2), p_2=(2,1), p_3 = (1,1)
 
-% Include the Rationality_Measures folder and all the subfolders to the path
+% Include the main folder and all the subfolders to the path
 addpath(genpath('../')) 
 
 % Columns are observations and rows are different goods
