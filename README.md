@@ -36,7 +36,7 @@ The *revealed preference* is
 $$x_{t}\mathrel{\operatorname{R}}x_{t^\prime}\iff p_t\cdot x_t\geq p_t\cdot x_{t^\prime}$$
 $$x_{t}\mathrel{\operatorname{P}}x_{t^\prime}\iff p_t\cdot x_t   > p_t\cdot x_{t^\prime}.$$
 
-A revealed preference $(\operatorname{R},\operatorname{P})$ is *acyclical* if there does not exist a cycle $(t_1,\dotsc, t_n)$ such that for each $1\leq i \leq n-1$, $x_{t_i}\mathrel{\operatorname{R}}x_{t_{i+1}}$ and $x_{t_n}\mathrel{\operatorname{P}}x_{t_{1}}$.
+A revealed preference $(\operatorname{R},\operatorname{P})$ is *acyclical* if there does not exist a cycle $(x_{t_1},\dotsc, x_{t_n})$ such that for each $1\leq i \leq n-1$, $x_{t_i}\mathrel{\operatorname{R}}x_{t_{i+1}}$ and $x_{t_n}\mathrel{\operatorname{P}}x_{t_{1}}$.
 
 The data $D$ is *rationalizable* if there exists a non-satiated utility $u:\mathbb{R}^G_{+}\to\mathbb{R}$ that explains the choices as maximizing the utility subject to the budget constraint i.e. such that for each $t$ 
 $$x_t\in \operatorname{arg\\,max}\\{ u(x)| x\cdot p_t \leq x_t\cdot p_t\\}.$$
