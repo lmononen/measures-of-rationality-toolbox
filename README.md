@@ -162,7 +162,7 @@ $$B(p_t,w_t)=\\{x\in \mathbb{R}_{+}^G| p_t \cdot x=w_t\\}.$$
 For a measure of rationality $I$, we are testing the null hypothesis with one-sided tests
 $$H_0: I\big((p_1,x_1),\dotsc, (p_T,x_T)\big)\sim I\big((p_1,\operatorname{Uni}(B(p_1,w_1))),\dotsc, (p_T,\operatorname{Uni}(B(p_T,w_T)))\big).$$
 
-Here, the p-value of the test is the probability that random choice is more (less) rational than the observed choices.
+Here, the p-value of the test is the probability that random choices are less (more) rational than the observed choices.
 
 ## Usage
 
