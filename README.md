@@ -42,7 +42,7 @@ A revealed preference $(\operatorname{R},\operatorname{P})$ is *acyclical* if th
 The data $D$ is *rationalizable* if there exists a non-satiated utility $u:\mathbb{R}^G_{+}\to\mathbb{R}$ that explains the choices as maximizing the utility subject to the budget constraint i.e. such that for each $t$ 
 $$x_t\in \operatorname{arg\\,max}\\{ u(x)| x\cdot p_t \leq x_t\cdot p_t\\}.$$
 
-As is well known, the data is rationalizable iff the revealed preference $(\operatorname{R},\operatorname{P})$ is acyclical (Afriat, 1967).
+As is well known, the data is rationalizable iff the revealed preference $(\operatorname{R},\operatorname{P})$ is acyclical and satisfies the generalized axiom of revealed preferences (GARP) (Afriat, 1967).
 
 ### Measures of Rationality
 
