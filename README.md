@@ -20,6 +20,7 @@ Matlab program for computing measures of rationality for consumer choice data us
     - [Inverse Varian's Goodness-of-Fit of degree α with Symmetric Utility](#inverse-varians-goodness-of-fit-of-degree-alpha-with-symmetric-utility)
     - [Normalized Minimum Cost Index of degree α with Symmetric Utility](#normalized-minimum-cost-index-of-degree-alpha-with-symmetric-utility)	
   - [Statistical Significance of Rationality Measures](#statistical-significance-of-rationality-measures)  	
+- [Installation](#installation)  
 - [Usage](#usage)
   - [Rationality Measures](#rationality-measures)
   - [Rationality Measures Symmetric](#rationality-measures-symmetric)
@@ -164,6 +165,19 @@ $$H_0: I\big((p_1,x_1),\dotsc, (p_T,x_T)\big)\sim I\big((p_1,\operatorname{Uni}(
 
 Here, the p-value of the test is the probability that random choices are less (more) rational than the observed choices.
 
+## Installation
+
+1. Download the repository.
+
+2. Open the main folder of the repository in MATLAB.
+
+3. Run the below command to include the main folder and the subfolders to the MATLAB path
+
+```
+addpath(genpath('./'))
+```
+
+
 ## Usage
 
 The directory `Examples` offers minimal examples of the usage and an application to the experiment from Choi et al., 2014, "Who Is (More) Rational?", American Economic Review. 
@@ -174,14 +188,14 @@ The function `rationality_measures` calculates measures of rationality from pric
 
     values_vec = rationality_measures(P, Q, power_vec)
       Input:
-        P: A matrix of prices where rows correspond to different goods and columns
-        to different time periods. The column vector at t gives the vector of
-        prices that the consumer faced in the period t. 
-        Q: A matrix of purchased quantities where rows correspond to different 
-        goods and columns to different time periods. The column vector at t gives 
-        the purchased bundle at period t. 
+        P: A matrix of prices where the rows index goods and the columns
+          index time periods. The column vector at t gives the vector of
+          prices that the consumer faced in the period t. 
+        Q: A matrix of purchased quantities where the rows index
+          goods and the columns index time periods. The column vector at t gives 
+          the purchased bundle at the period t. 
         power_vec: A vector of power variations to calculate for Varian's index, 
-        inverse Varian's index, and normalized minimum cost index. 
+          inverse Varian's index, and normalized minimum cost index. 
         
       Output: 
         values_vec(1): Afriat's index
@@ -200,14 +214,12 @@ The function `rationality_measures_symmetric` calculates measures of rationality
 
     values_vec = rationality_measures_symmetric(P, Q, power_vec)
       Input:
-        P: A matrix of prices where rows correspond to different goods and columns
-        to different time periods. The column vector at t gives the vector of
-        prices that the consumer faced in the period t. 
-        Q: A matrix of purchased quantities where rows correspond to different 
-        goods and columns to different time periods. The column vector at t gives 
-        the purchased bundle at period t. 
+        P: A matrix of prices where the rows index goods and the columns
+          index time periods. 
+        Q: A matrix of purchased quantities where the rows index
+          goods and the columns index time periods. 
         power_vec: A vector of power variations to calculate for Varian's index, 
-        inverse Varian's index, and normalized minimum cost index. 
+          inverse Varian's index, and normalized minimum cost index. 
         
       Output: 
         values_vec(1): Afriat's index with symmetric utility
@@ -225,26 +237,24 @@ The function `statistical_significance` compares the measure of rationality from
     [prob_more_rational_than_random, prob_less_rational_than_random, prob_random_satisfies_garp] 
 	= statistical_significance(P, Q, power_vec, sample_size)    
       Input:
-        P: A matrix of prices where rows correspond to different goods and columns
-        to different time periods. The column vector at t gives the vector of
-        prices that the consumer faced in the period t. 
-        Q: A matrix of purchased quantities where rows correspond to different 
-        goods and columns to different time periods. The column vector at t gives 
-        the purchased bundle at period t. 
+        P: A matrix of prices where the rows index goods and the columns
+          index time periods. 
+        Q: A matrix of purchased quantities where the rows index
+          goods and the columns index time periods. 
         power_vec: powers of indices to calculate for Varian's index, inverse
-        Varian's index, and normalized minimum cost index.
+          Varian's index, and normalized minimum cost index.
         sample_size: The number of draws from the budget line used to estimate the
-        probabilities. 
+          probabilities. 
      
       Output:
         prob_more_rational_than_random: For each measure of rationality, 
-        the probability that the data has a lower measure of rationality than 
-        choosing uniformly on the budget line.
+          the probability that the data has a lower measure of rationality than 
+          choosing uniformly on the budget line.
         prob_less_rational_than_random: For each measure of rationality, 
-        the probability that the data has a higher measure of rationality than 
-        choosing uniformly on the budget line.
-        prob_random_satisfies_garp: Probability that uniform choices on the
-        budget line satisfy GARP.
+          the probability that the data has a higher measure of rationality than 
+          choosing uniformly on the budget line.
+        prob_random_satisfies_garp: The probability that uniform choices on the
+          budget line satisfy GARP.
      
       The order of indices:
         1: Afriat's index

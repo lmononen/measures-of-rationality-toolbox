@@ -8,12 +8,12 @@
 function values_vec = rationality_measures(P,Q, power_vec)
 % Calculates measures of rationality from prices and quantities. 
 % Input:
-%   P: A matrix of prices where rows correspond to different goods and columns
-%   to different time periods. The column vector at t gives the vector of
-%   prices that the consumer faced in the period t. 
-%   Q: A matrix of purchased quantities where rows correspond to different 
-%   goods and columns to different time periods. The column vector at t gives 
-%   the purchased bundle at period t. 
+%   P: A matrix of prices where the rows index goods and the columns index
+%   time periods. The column vector at t gives the vector of prices that 
+%   the consumer faced in the period t. 
+%   Q: A matrix of purchased quantities where the rows index
+%   goods and the columns index time periods. The column vector at t gives 
+%   the purchased bundle at the period t. 
 %   power_vec: A vector of power variations to calculate for Varian's index, 
 %   inverse Varian's index, and normalized minimum cost index. 
 %

@@ -38,8 +38,12 @@ find(isnan(data));
 agents=size(data,1);
 periods=25;
 goods=2;
-agentP=zeros(agents,goods,periods);
-agentQ=zeros(agents,goods,periods);
+
+% For each agent, the data consists of prices and bundles. These are represented
+% as matrices where the rows index goods and the columns index periods
+agentP = zeros(agents,goods,periods);
+agentQ = zeros(agents,goods,periods);
+
 
 % Each data row consists of user_id, the maximum x quantity available for 
 % each period, the maximum y quantity available for each period, the 

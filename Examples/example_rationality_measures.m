@@ -12,7 +12,7 @@
 % Include the main folder and all the subfolders to the path
 addpath(genpath('../')) 
 
-% Columns are observations and rows are different goods
+% The columns index observations and the rows index goods
 Q=[[1;2], [2;1], [2;2]];
 P=[[1;2], [2;1], [1;1]];
 
