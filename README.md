@@ -42,7 +42,7 @@ A revealed preference $(\operatorname{R},\operatorname{P})$ is *acyclical* if th
 The data $D$ is *rationalizable* if there exists a non-satiated utility $u:\mathbb{R}^G_{+}\to\mathbb{R}$ that explains the choices as maximizing the utility subject to the budget constraint i.e. such that for each $t$ 
 $$x_t\in \operatorname{arg\\,max}\\{ u(x)| x\cdot p_t \leq x_t\cdot p_t\\}.$$
 
-As is well known, the data is rationalizable iff the revealed preference $(\operatorname{R},\operatorname{P})$ is acyclical and satisfies the generalized axiom of revealed preferences (GARP) (Afriat, 1967).
+As is well known, the data is rationalizable iff the revealed preference $(\operatorname{R},\operatorname{P})$ is acyclical and satisfies the generalized axiom of revealed preference (GARP) (Afriat, 1967).
 
 ### Measures of Rationality
 
@@ -54,7 +54,7 @@ For a common adjustment factor $e\in[0,1]$, define the relaxed revealed preferen
 $$x_{t}\mathrel{\operatorname{R}^{e}}x_{t^\prime}\iff (1-e)p_t\cdot x_t\geq p_t\cdot x_{t^\prime}$$
 $$x_{t}\mathrel{\operatorname{P}^{e}}x_{t^\prime}\iff (1-e)p_t\cdot x_t   > p_t\cdot x_{t^\prime}.$$
 
-Afriat's efficiency index (1972) is 
+Afriat's critical cost efficiency index (1972) is 
 $$\inf_{e\in[0,1]}e\text{ such that }(\operatorname{R}^{e},\operatorname{P}^{e}) \text{ is acyclical.}$$
 
 #### Houtman-Maks Index
@@ -171,7 +171,7 @@ Here, the p-value of the test is the probability that random choices are less (m
 
 2. Open the main folder of the repository in MATLAB.
 
-3. Run the below command to include the main folder and the subfolders to the MATLAB path
+3. Add the main folder and the subfolders to the MATLAB path with the command
 
 ```
 addpath(genpath('./'))
