@@ -29,13 +29,13 @@ Matlab program for computing measures of rationality for consumer choice data us
 
 ## Background
 
-The observed consumer choice data consists of $T$ observation of bundles and prices
+The observed consumer choice data consists of $T$ observations of prices and bundles
 $$D=\big((p_1,x_1),\dotsc,(p_T,x_T)\big)$$
-where $p_i\in \mathbb{R}^G_{++}$ and $x_i\in \mathbb{R}^G_{+}$ for the number of goods $G$. 
+where prices $p_t\in \mathbb{R}^G_{++}$ and bundles $x_t\in \mathbb{R}^G_{+}$ for the number of goods $G$. 
 
 The *revealed preference* is 
 $$x_{t}\mathrel{\operatorname{R}}x_{t^\prime}\iff p_t\cdot x_t\geq p_t\cdot x_{t^\prime}$$
-$$x_{t}\mathrel{\operatorname{P}}x_{t^\prime}\iff p_t\cdot x_t   > p_t\cdot x_{t^\prime}.$$
+$$x_{t}\mathrel{\operatorname{P}}x_{t^\prime}\iff p_t\cdot x_t   > p_t\cdot x_{t^\prime}\mathrlap{.}$$
 
 A revealed preference $(\operatorname{R},\operatorname{P})$ is *acyclical* if there does not exist a cycle $(x_{t_1},\dotsc, x_{t_n})$ such that for each $1\leq i \leq n-1$, $x_{t_i}\mathrel{\operatorname{R}}x_{t_{i+1}}$ and $x_{t_n}\mathrel{\operatorname{P}}x_{t_{1}}$.
 
@@ -52,7 +52,7 @@ The measures of rationality capture how close the observed data is to being rati
 
 For a common adjustment factor $e\in[0,1]$, define the relaxed revealed preference $(\operatorname{R}^{e},\operatorname{P}^{e})$ by for all 
 $$x_{t}\mathrel{\operatorname{R}^{e}}x_{t^\prime}\iff (1-e)p_t\cdot x_t\geq p_t\cdot x_{t^\prime}$$
-$$x_{t}\mathrel{\operatorname{P}^{e}}x_{t^\prime}\iff (1-e)p_t\cdot x_t   > p_t\cdot x_{t^\prime}.$$
+$$x_{t}\mathrel{\operatorname{P}^{e}}x_{t^\prime}\iff (1-e)p_t\cdot x_t   > p_t\cdot x_{t^\prime}\mathrlap{.}$$
 
 Afriat's critical cost efficiency index (1972) is 
 $$\inf_{e\in[0,1]}e\text{ such that }(\operatorname{R}^{e},\operatorname{P}^{e}) \text{ is acyclical.}$$
@@ -69,30 +69,30 @@ $$\inf_{B\subseteq \operatorname{R}}\frac{1}{T}|B|\text{ such that }(\operatorna
 
 #### Varian's Goodness-of-Fit of Degree $\alpha$
 
-For an observation specific adjustment factors $(e_t)\in[0,1]^T$, define the relaxed revealed preference $(\operatorname{R}^{(e_t)},\operatorname{P}^{(e_t)})$ by for all 
+For observation specific adjustment factors $(e_t)\in[0,1]^T$, define the relaxed revealed preference $(\operatorname{R}^{(e_t)},\operatorname{P}^{(e_t)})$ by for all 
 $$x_{t}\mathrel{\operatorname{R}^{(e_t)}}x_{t^\prime}\iff (1-e_t)p_t\cdot x_t\geq p_t\cdot x_{t^\prime}$$
-$$x_{t}\mathrel{\operatorname{P}^{(e_t)}}x_{t^\prime}\iff (1-e_t)p_t\cdot x_t   > p_t\cdot x_{t^\prime}.$$
+$$x_{t}\mathrel{\operatorname{P}^{(e_t)}}x_{t^\prime}\iff (1-e_t)p_t\cdot x_t   > p_t\cdot x_{t^\prime}\mathrlap{.}$$
 
 Varian's goodness-of-fit of degree $\alpha$ (Varian, 1990; Mononen, 2022)  is 
-$$\inf_{e_t)\in[0,1]^T}\frac{1}{T}\sum_{t=1}^T e_t^\alpha\text{ such that }(\operatorname{R}^{(e_t)},\operatorname{P}^{(e_t)}) \text{ is acyclical.}$$
+$$\inf_{(e_t)\in[0,1]^T}\frac{1}{T}\sum_{t=1}^T e_t^\alpha\text{ such that }(\operatorname{R}^{(e_t)},\operatorname{P}^{(e_t)}) \text{ is acyclical.}$$
 
 #### Inverse Varian's Goodness-of-Fit of Degree $\alpha$
 
-For an observation specific adjustment factors $(e_{t^\prime})\in[0,1]^T$, define the relaxed revealed preference $(\operatorname{R}^{(e_{t^\prime})},\operatorname{P}^{(e_{t^\prime})})$ by for all 
+For observation specific adjustment factors $(e_{t^\prime})\in[0,1]^T$, define the relaxed revealed preference $(\operatorname{R}^{(e_{t^\prime})},\operatorname{P}^{(e_{t^\prime})})$ by for all 
 $$x_{t}\mathrel{\operatorname{R}^{(e_{t^\prime})}}x_{t^\prime}\iff p_t\cdot x_t\geq (1-e_{t^\prime})p_t\cdot x_{t^\prime}$$
-$$x_{t}\mathrel{\operatorname{P}^{(e_{t^\prime})}}x_{t^\prime}\iff p_t\cdot x_t   > (1-e_{t^\prime})p_t\cdot x_{t^\prime}.$$
+$$x_{t}\mathrel{\operatorname{P}^{(e_{t^\prime})}}x_{t^\prime}\iff p_t\cdot x_t   > (1-e_{t^\prime})p_t\cdot x_{t^\prime}\mathrlap{.}$$
 
 Inverse Varian's goodness-of-fit of degree $\alpha$ (Mononen, 2022) is 
 $$\inf_{(e_{t^\prime})\in[0,1]^T}\frac{1}{T}\sum_{t^\prime=1}^T e_{t^\prime}^\alpha\text{ such that }(\operatorname{R}^{(e_{t^\prime})},\operatorname{P}^{(e_{t^\prime})}) \text{ is acyclical.}$$
 
 #### Normalized Minimum Cost Index of Degree $\alpha$
 
-For a relation specific adjustment factors $(e_{t,t^\prime})\in[0,1]^{T\times T}$, define the relaxed revealed preference $(\operatorname{R}^{(e_{t,t^\prime})},\operatorname{P}^{(e_{t,t^\prime})})$ by for all 
+For relation specific adjustment factors $(e_{t,t^\prime})\in[0,1]^{T\times T}$, define the relaxed revealed preference $(\operatorname{R}^{(e_{t,t^\prime})},\operatorname{P}^{(e_{t,t^\prime})})$ by for all 
 $$x_{t}\mathrel{\operatorname{R}^{(e_{t,t^\prime})}}x_{t^\prime}\iff p_t\cdot x_t\geq (1-e_{t,t^\prime})p_t\cdot x_{t^\prime}$$
-$$x_{t}\mathrel{\operatorname{P}^{(e_{t,t^\prime})}}x_{t^\prime}\iff p_t\cdot x_t   > (1-e_{t,t^\prime})p_t\cdot x_{t^\prime}.$$
+$$x_{t}\mathrel{\operatorname{P}^{(e_{t,t^\prime})}}x_{t^\prime}\iff p_t\cdot x_t   > (1-e_{t,t^\prime})p_t\cdot x_{t^\prime}\mathrlap{.}$$
 
 Normalized minimum cost index of degree $\alpha$ (Mononen, 2022) is 
-$$\inf_{(e_{t^\prime})\in[0,1]^T}\frac{1}{T}\sum_{t^\prime=1}^T e_{t,t^\prime}^\alpha\text{ such that }(\operatorname{R}^{(e_{t^\prime})},\operatorname{P}^{(e_{t^\prime})}) \text{ is acyclical.}$$
+$$\inf_{(e_{t,t^\prime})\in[0,1]^T}\frac{1}{T}\sum_{t=1}^T\sum_{t^\prime=1}^T e_{t,t^\prime}^\alpha\text{ such that }(\operatorname{R}^{(e_{t,t^\prime})},\operatorname{P}^{(e_{t,t^\prime})}) \text{ is acyclical.}$$
 
 ### Measures of Rationality for Rationalization with Symmetric Utility
 
@@ -101,8 +101,8 @@ Next, we consider the rationalization of the observed choices by a symmetric uti
 For a permutation of goods $\pi:\\{1,\dotsc, G\\}\to\\{1,\dotsc, G\\}$, denote the permutation of a bundle $(x_i)\_{i=1}^{G}$ as $\pi((x_i)\_{i=1}^{G})=(x_{\pi(i)})_{i=1}^G$.
 
 Define the symmetrically extended revealed preference for all $t, t^\prime$ and permutations $\pi$ as  
-$$x_{t}\mathrel{\operatorname{R_S}}\pi(x_{t^\prime})\iff p_t\cdot x_t\geq p_t\cdot \pi(x_{t^\prime})\text{ or } t=t^\prime$$
-$$x_{t}\mathrel{\operatorname{P_S}}x_{t^\prime}\iff p_t\cdot x_t   > p_t\cdot x_{t^\prime}.$$
+$$x\_\{t\}\mathrel\{\operatorname\{R\_S\}\}\pi\(x\_\{t\^\prime\}\)\iff p\_t\cdot x\_t\geq p\_t\cdot \pi\(x\_\{t\^\prime\}\)\text\{ or \} t=t\^\prime$$
+$$x\_\{t\}\mathrel\{\operatorname\{P\_S\}\}\pi\(x\_\{t\^\prime\}\)\iff p\_t\cdot x\_t   > p\_t\cdot \pi\(x\_\{t\^\prime\}\)\mathrlap\{.\}\phantom\{\text\{ or \} t=t\^\prime\}$$
 
 The choices can be rationalized by a symmetric and non-satiated utility function if and only if $(\operatorname{R_S},\operatorname{P_S})$ is acyclical (Chambers & Rehbeck, 2018). 
 
@@ -110,12 +110,12 @@ Using these symmetrically extended revealed preferences and their acyclicality, 
 
 ####  Afriat's Efficiency Index with Symmetric Utility
 
-For a common adjustment factor $e\in[0,1]$, define the relaxed revealed preference $(\operatorname{R_S}^{e},\operatorname{P_S}^{e})$ by for all  $t, t^\prime$ and permutations $\pi$ as  
-$$x_{t}\mathrel{\operatorname{R_S}}\pi(x_{t^\prime})\iff (1-e)p_t\cdot x_t\geq p_t\cdot \pi(x_{t^\prime})\text{ or } t=t^\prime$$
-$$x_{t}\mathrel{\operatorname{P_S}}\pi(x_{t^\prime})\iff (1-e)p_t\cdot x_t   > p_t\cdot \pi(x_{t^\prime}).$$
+For a common adjustment factor $e\in[0,1]$, define the relaxed revealed preference $(\operatorname{R^{\text{\\(e\\)}}_S},\operatorname{P^{\text{\\(e\\)}}_S})$ by for all  $t, t^\prime$ and permutations $\pi$ as  
+$$x\_\{t\}\mathrel\{\operatorname\{R\_S\^\{\\text\{\\(e\\)\}\}\}\}\pi\(x\_\{t\^\prime\}\)\iff \(1-e\)p\_t\cdot x\_t\geq p\_t\cdot \pi\(x\_\{t\^\prime\}\)\text\{ or \} t=t\^\prime$$
+$$x\_\{t\}\mathrel\{\operatorname\{P\_S\^\{\\text\{\\(e\\)\}\}\}\}\pi\(x\_\{t\^\prime\}\)\iff \(1-e\)p\_t\cdot x\_t   > p\_t\cdot \pi\(x\_\{t\^\prime\}\)\mathrlap\{.\}\phantom\{\text\{ or \} t=t\^\prime\}$$
 
 Afriat's efficiency index with symmetric utility is 
-$$\inf_{e\in[0,1]}e\text{ such that }(\operatorname{R_S}^{e},\operatorname{P_S}^{e}) \text{ is acyclical.}$$
+$$\inf_{e\in[0,1]}e\text{ such that }(\operatorname{R^{\text{\\(e\\)}}_S},\operatorname{P^{\text{\\(e\\)}}_S}) \text{ is acyclical.}$$
 
 #### Houtman-Maks Index with Symmetric Utility
 
@@ -125,36 +125,36 @@ $$\inf_{B\subseteq T}\frac{1}{T}|B|\text{ such that } (p_i,x_i)_{i\in\\{1,\dotsc
 #### Swaps Index with Symmetric Utility
 
 Swaps index with symmetric utility is $\inf_{B\subseteq \operatorname{R_S}}\frac{1}{T}|B|$  such that by defining for all  $t, t^\prime$ with $(t,t^\prime)\notin B$ and permutations $\pi$ 
-$$x_{t}\mathrel{\operatorname{R_S}}\pi(x_{t^\prime})\iff (1-e)p_t\cdot x_t\geq p_t\cdot \pi(x_{t^\prime})\text{ or } t=t^\prime$$
-$$x_{t}\mathrel{\operatorname{P_S}}\pi(x_{t^\prime})\iff (1-e)p_t\cdot x_t   > p_t\cdot \pi(x_{t^\prime})$$
-$(\operatorname{R_S},\operatorname{P_S})$ is acyclical. 
+$$x\_\{t\}\mathrel\{\operatorname\{R\_S\^\{\\text\{\\(B\\)\}\}\}\}\pi\(x\_\{t\^\prime\}\)\iff \(1-e\)p\_t\cdot x\_t\geq p\_t\cdot \pi\(x\_\{t\^\prime\}\)\text\{ or \} t=t\^\prime$$
+$$x\_\{t\}\mathrel\{\operatorname\{P\_S\^\{\\text\{\\(B\\)\}\}\}\}\pi\(x\_\{t\^\prime\}\)\iff \(1-e\)p\_t\cdot x\_t   > p\_t\cdot \pi\(x\_\{t\^\prime\}\)\phantom\{\text\{ or \} t=t\^\prime\}$$
+$(\operatorname{R_S^{\text{\\(B\\)}}},\operatorname{P_S^{\text{\\(B\\)}}})$ is acyclical. 
 
 #### Varian's Goodness-of-Fit of Degree $\alpha$ with Symmetric Utility
 
-For an observation specific adjustment factors $(e_t)\in[0,1]^T$, define the relaxed revealed preference $(\operatorname{R_S}^{(e_t)},\operatorname{P_S}^{(e_t)})$  by for all  $t, t^\prime$ and permutations $\pi$ as  
-$$x_{t}\mathrel{\operatorname{R_S}^{(e_t)}}\pi(x_{t^\prime})\iff (1-e_t)p_t\cdot x_t\geq p_t\cdot \pi(x_{t^\prime})\text{ or } t=t^\prime$$
-$$x_{t}\mathrel{\operatorname{P_S}^{(e_t)}}\pi(x_{t^\prime})\iff (1-e_t)p_t\cdot x_t   > p_t\cdot \pi(x_{t^\prime}).$$
+For observation specific adjustment factors $(e_t)\in[0,1]^T$, define the relaxed revealed preference $(\operatorname{R^{\text{\\((e_t)\\)}}_S},\operatorname{P^{\text{\\((e_t)\\)}}_S})$  by for all  $t, t^\prime$ and permutations $\pi$ as  
+$$x\_\{t\}\mathrel\{\operatorname\{R\^\{\\text\{\\(\(e\_t\)\\)\}\}\_S\}\}\pi\(x\_\{t\^\prime\}\)\iff \(1-e\_t\)p\_t\cdot x\_t\geq p\_t\cdot \pi\(x\_\{t\^\prime\}\)\text\{ or \} t=t\^\prime$$
+$$x\_\{t\}\mathrel\{\operatorname\{P\^\{\\text\{\\(\(e\_t\)\\)\}\}\_S\}\}\pi\(x\_\{t\^\prime\}\)\iff \(1-e\_t\)p\_t\cdot x\_t   > p\_t\cdot \pi\(x\_\{t\^\prime\}\)\mathrlap\{.\}\phantom\{\text\{ or \} t=t\^\prime\}$$
 
 Varian's goodness-of-fit of degree $\alpha$ with symmetric utility is 
-$$\inf_{e_t)\in[0,1]^T}\frac{1}{T}\sum_{t=1}^T e_t^\alpha\text{ such that }(\operatorname{R_S}^{(e_t)},\operatorname{P_S}^{(e_t)}) \text{ is acyclical.}$$
+$$\inf_{(e_t)\in[0,1]^T}\frac{1}{T}\sum_{t=1}^T e_t^\alpha\text{ such that }(\operatorname{R^{\text{\\((e_t)\\)}}_S},\operatorname{P^{\text{\\((e_t)\\)}}_S}) \text{ is acyclical.}$$
 
 #### Inverse Varian's Goodness-of-Fit of Degree $\alpha$ with Symmetric Utility
 
-For an observation specific adjustment factors $(e_{t^\prime})\in[0,1]^T$, define the relaxed revealed preference $(\operatorname{R_S}^{(e_{t^\prime})},\operatorname{P_S}^{(e_{t^\prime})})$  by for all  $t, t^\prime$ and permutations $\pi$ as  
-$$x_{t}\mathrel{\operatorname{R_S}^{(e_{t^\prime})}}\pi(x_{t^\prime})\iff p_t\cdot x_t\geq (1-e_{t^\prime})p_t\cdot \pi(x_{t^\prime})\text{ or } t=t^\prime$$
-$$x_{t}\mathrel{\operatorname{P_S}^{(e_{t^\prime})}}\pi(x_{t^\prime})\iff p_t\cdot x_t   > (1-e_{t^\prime})p_t\cdot \pi(x_{t^\prime}).$$
+For observation specific adjustment factors $(e_{t^\prime})\in[0,1]^T$, define the relaxed revealed preference $\(\operatorname\{R\^\{\(e\_\{t\^\prime\}\)\}\_S\},\operatorname\{P\^\{\(e\_\{t\^\prime\}\)\}\_S\}\)$  by for all  $t, t^\prime$ and permutations $\pi$ as  
+$$x\_\{t\}\mathrel\{\operatorname\{R\^\{\\text\{\\(\(e\_\{t\^\prime\}\)\\)\}\}\_S\}\}\pi\(x\_\{t\^\prime\}\)\iff p\_t\cdot x\_t\geq \(1-e\_\{t\^\prime\}\)p\_t\cdot \pi\(x\_\{t\^\prime\}\)\text\{ or \} t=t\^\prime$$
+$$x\_\{t\}\mathrel\{\operatorname\{P\^\{\\text\{\\(\(e\_\{t\^\prime\}\)\\)\}\}\_S\}\}\pi\(x\_\{t\^\prime\}\)\iff p\_t\cdot x\_t   > \(1-e\_\{t\^\prime\}\)p\_t\cdot \pi\(x\_\{t\^\prime\}\)\mathrlap\{.\}\phantom\{\text\{ or \} t=t\^\prime\}$$
 
 Inverse Varian's goodness-of-fit of degree $\alpha$ with symmetric utility is 
-$$\inf_{(e_{t^\prime})\in[0,1]^T}\frac{1}{T}\sum_{t^\prime=1}^T e_{t^\prime}^\alpha\text{ such that }(\operatorname{R_S}^{(e_{t^\prime})},\operatorname{P_S}^{(e_{t^\prime})}) \text{ is acyclical.}$$
+$$\inf\_\{\(e\_\{t\^\prime\}\)\in[0,1]\^T\}\frac\{1\}\{T\}\sum\_\{t\^\prime=1\}\^T e\_\{t\^\prime\}\^\alpha\text\{ such that \}\(\operatorname\{R\^\{\\text\{\\(\(e\_\{t\^\prime\}\)\\)\}\}\_S\},\operatorname\{P\^\{\\text\{\\(\(e\_\{t\^\prime\}\)\\)\}\}\_S\}\) \text\{ is acyclical.\}$$
 
 #### Normalized Minimum Cost Index of Degree $\alpha$ with Symmetric Utility
 
-For a relation specific adjustment factors $(e_{t,t^\prime})\in[0,1]^{T\times T}$, define the relaxed revealed preference $(\operatorname{R_S}^{(e_{t,t^\prime})},\operatorname{P_S}^{(e_{t,t^\prime})})$  by for all  $t, t^\prime$ and permutations $\pi$ as  
-$$x_{t}\mathrel{\operatorname{R_S}^{(e_{t,t^\prime})}}\pi(x_{t^\prime})\iff (1-e_{t,t^\prime})p_t\cdot x_t\geq p_t\cdot \pi(x_{t^\prime})\text{ or } t=t^\prime$$
-$$x_{t}\mathrel{\operatorname{P_S}^{(e_{t,t^\prime})}}\pi(x_{t^\prime})\iff (1-e_{t,t^\prime})p_t\cdot x_t   > p_t\cdot \pi(x_{t^\prime}).$$
+For relation specific adjustment factors $(e_{t,t^\prime})\in[0,1]^{T\times T}$, define the relaxed revealed preference $\(\operatorname\{R\^\{\\text\{\\(\(e\_\{t,t\^\prime\}\)\\)\}\}\_S\},\operatorname\{P\^\{\\text\{\\(\(e\_\{t,t\^\prime\}\\)\)\}\}\_S\}\)$  by for all  $t, t^\prime$ and permutations $\pi$ as  
+$$x\_\{t\}\mathrel\{\operatorname\{R\^\{\\text\{\\(\(e\_\{t,t\^\prime\}\)\\)\}\}\_S\}\}\pi\(x\_\{t\^\prime\}\)\iff \(1-e\_\{t,t\^\prime\}\)p\_t\cdot x\_t\geq p\_t\cdot \pi\(x\_\{t\^\prime\}\)\text\{ or \} t=t\^\prime$$
+$$x\_\{t\}\mathrel\{\operatorname\{P\^\{\\text\{\\(\(e\_\{t,t\^\prime\}\)\\)\}\}\_S\}\}\pi\(x\_\{t\^\prime\}\)\iff \(1-e\_\{t,t\^\prime\}\)p\_t\cdot x\_t   > p\_t\cdot \pi\(x\_\{t\^\prime\}\)\mathrlap\{.\}\phantom\{\text\{ or \} t=t\^\prime\}$$
 
 Normalized minimum cost index of degree $\alpha$ with symmetric utility is 
-$$\inf_{(e_{t^\prime})\in[0,1]^T}\frac{1}{T}\sum_{t^\prime=1}^T e_{t,t^\prime}^\alpha\text{ such that }(\operatorname{R_S}^{(e_{t^\prime})},\operatorname{P_S}^{(e_{t^\prime})}) \text{ is acyclical.}$$
+$$\inf\_\{\(e\_\{t,t\^\prime\}\)\in[0,1]\^T\}\frac\{1\}\{T\}\sum\_\{t=1\}\^T\sum\_\{t\^\prime=1\}\^T e\_\{t,t\^\prime\}\^\alpha\text\{ such that \}\(\operatorname\{R\^\{\\text\{$\(e\_\{t,t\^\prime\}\)$\}\}\_S\},\operatorname\{P\^\{\\text\{$\(e\_\{t,t\^\prime\}\)$\}\}\_S\}\) \text\{ is acyclical.\}$$
 
 ### Statistical Significance of Rationality Measures
 
@@ -199,7 +199,7 @@ The function `rationality_measures` calculates measures of rationality from pric
         
       Output: 
         values_vec(1): Afriat's index
-        values_vec(2): Houthman-Maks index
+        values_vec(2): Houtman-Maks index
         values_vec(3): Swaps index
         For each power_vec(j):
           values_vec(3*j + 1): Varian's index of degree power_vec(j)
@@ -223,7 +223,7 @@ The function `rationality_measures_symmetric` calculates measures of rationality
         
       Output: 
         values_vec(1): Afriat's index with symmetric utility
-        values_vec(2): Houthman-Maks index with symmetric utility
+        values_vec(2): Houtman-Maks index with symmetric utility
         values_vec(3): Swaps index with symmetric utility
         For each power_vec(j):
           values_vec(3*j + 1): Varian's index of degree power_vec(j) with symmetric utility
