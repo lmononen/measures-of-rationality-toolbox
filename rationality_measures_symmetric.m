@@ -1,4 +1,4 @@
-%    rationality_measures_symmetric - Rationality_Measures Copyright (C) 2022  Lasse Mononen
+%    rationality_measures_symmetric - Rationality_Measures Copyright (C) 2023  Lasse Mononen
 %
 %    This program is free software: you can redistribute it and/or modify
 %    it under the terms of the GNU General Public License as published by
@@ -58,6 +58,21 @@ function values_vec = rationality_measures_symmetric(P, Q, power_vec)
 %     income at the revealed preference comparison of t over u, the 
 %     revealed preferences can be rationalized by a symmetric utility 
 %     function. This is normalized by the number of observations. 
+
+%     If power_vec(j) == 0: The limiting measures for a small degree
+%       values_vec(3*j + 1): Varian's index of degree 0:
+%       As before but the objective function is the number of positive 
+%       e_ts + the geometric average of the positive e_ts normalized by 
+%       the number of observations. 
+%  
+%       values_vec(3*j + 2): Inverse Varian's index of degree 0: 
+%       As before but the objective function is the number of positive 
+%       e_ts + the geometric average of the positive e_ts normalized by 
+%       the number of observations. 
+%  
+%       values_vec(3*j + 3): Normalized minimum cost index of degree 0: 
+%       As before but the total cost of removals is the number of positive 
+%       removals + the geometric average of the removals. 
 
 % Variables:
 %   The revealed graph represented vertex_to_index, neighbors, and weights:

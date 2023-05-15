@@ -1,19 +1,22 @@
-%    calculate_nmci - Rationality_Measures Copyright (C) 2022  Lasse Mononen
+%    calculate_nmci_geom_avg - Rationality_Measures Copyright (C) 2023  Lasse Mononen
 %
 %    This program is free software: you can redistribute it and/or modify
 %    it under the terms of the GNU General Public License as published by
 %    the Free Software Foundation, either version 3 of the License, or
 %    (at your option) any later version.
 
-function [value, cycles_in, cycle_sizes_in] = calculate_nmci(neighbors, ...
-    vertex_to_index, weights, power, cycles_in, cycle_sizes_in)
-% Non-normalized normalized minimum cost index of order p: The minimum cost 
-% of removals of edges to make the graph acyclical. Additionally, the costs 
-% are raised to the power of p. 
+function [value, cycles_in, cycle_sizes_in] = calculate_nmci_geom_avg(neighbors, ...
+    vertex_to_index, weights, cycles_in, cycle_sizes_in, max_removals)
+% Non-normalized normalized minimum cost index of order 0: The minimum cost 
+% of removals of edges to make the graph acyclical. The total cost of removals 
+% is the number of positive removals + the geometric average of the positive 
+% removals. This function returns sum of log(removals) for the positive optimal
+% removals. 
 %
-% Calculates the non-normalized normalized minimum cost index of order p 
-% for the graph given by neighbors, vertex_to_index, and weights starting 
-% from the set of critical cycles given by cycles_in, cycle_sizes_in. 
+% Finds the optimal removals for the non-normalized normalized minimum cost 
+% index of order 0 for the graph given by neighbors, vertex_to_index, and 
+% weights starting  from the set of critical cycles given by cycles_in, 
+% cycle_sizes_in. 
 % The index is calculated iteratively by finding the optimal edge removals
 % to remove all the current critical cycles and then checking if there are 
 % any other critical cycles that the removals missed until there are no 
@@ -25,7 +28,8 @@ function [value, cycles_in, cycle_sizes_in] = calculate_nmci(neighbors, ...
 %     vertex_to_index(v+1)-1 give the out-edges for the vertex v.
 %     neighbors(i): The in-vertex of the edge i. 
 %     weight(i): The weight of the edge i. 
-%   power: The power order of NMCI index. 
+%   max_removals: The value of the strict swaps index i.e. the minimum
+%   number of removals to break all the strict cycles. 
 %   The starting set of critical cycles represented by cycles_in: vector of edge
 %   indices in the cycles and by cycle_sizes_in: vector of cycle lenghts.
 
@@ -38,7 +42,7 @@ function [value, cycles_in, cycle_sizes_in] = calculate_nmci(neighbors, ...
 %   problem of removing all the found critical cycles by removing edges 
 %   removals: Indicator vector for optimal levels set for e_ts based on the
 %   weight of the edge that the e_t is set at.
-%   value: Optimal cost of removals.
+%   value: The sum of logarithm of the positive optimal removals
 
     value = 0;
     
@@ -46,6 +50,12 @@ function [value, cycles_in, cycle_sizes_in] = calculate_nmci(neighbors, ...
     has_cycle = true;
 
     iteration_counter = 0;
+    
+    %Log weights
+    log_weights = weights;
+    log_weights(log_weights == 0) = 1;
+    log_weights = log(log_weights);
+    
 
     % Constraint matrix for the programming problem
     constraint_matrix=zeros(0,size(neighbors,2));
@@ -79,10 +89,11 @@ function [value, cycles_in, cycle_sizes_in] = calculate_nmci(neighbors, ...
             % Expand the constraint_matrix with the new critical cycles
             % See below for the function
             constraint_matrix = min_const_matrix_nmci(cycles, cycle_sizes, constraint_matrix);
-
+			
             % Find the optimal method to remove the new found cycles and all
-            % the previous cycles 
-            [removals,value] = find_removals(weights, constraint_matrix, power);
+            % the previous cycles when at most max_removals removals are
+            % done
+            [removals,value] = find_removals_max_removals(log_weights, constraint_matrix, max_removals);
             
             % Add removals of zero trades
             removals(weights == 0) = true;

@@ -1,4 +1,4 @@
-%    Rationality_Measures Copyright (C) 2022  Lasse Mononen
+%    Rationality_Measures Copyright (C) 2023  Lasse Mononen
 %
 %    This program is free software: you can redistribute it and/or modify
 %    it under the terms of the GNU General Public License as published by
@@ -47,6 +47,21 @@ function values_vec = rationality_measures(P,Q, power_vec)
 %     preferences satisfy GARP when the cost of removing the revealed preference 
 %     x_t > x_u is (p_t.(x_t-x_u)/p_t.x_t)^p, where . denotes the dot product. This 
 %     is normalized by the number of observations. 
+
+%     If power_vec(j) == 0: The limiting measures for a small degree
+%       values_vec(3*j + 1): Varian's index of degree 0:
+%       As before but the objective function is the number of positive 
+%       e_ts + the geometric average of the positive e_ts normalized by 
+%       the number of observations. 
+%  
+%       values_vec(3*j + 2): Inverse Varian's index of degree 0: 
+%       As before but the objective function is the number of positive 
+%       e_ts + the geometric average of the positive e_ts normalized by 
+%       the number of observations. 
+%  
+%       values_vec(3*j + 3): Normalized minimum cost index of degree 0: 
+%       As before but the total cost of removals is the number of positive 
+%       removals + the geometric average of the removals. 
 
 % Variables:
 %   The revealed graph represented vertex_to_index, neighbors, and weights:

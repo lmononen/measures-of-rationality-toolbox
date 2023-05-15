@@ -1,4 +1,4 @@
-%    rationality_measures_from_graph - Rationality_Measures Copyright (C) 2022  Lasse Mononen
+%    rationality_measures_from_graph - Rationality_Measures Copyright (C) 2023  Lasse Mononen
 %
 %    This program is free software: you can redistribute it and/or modify
 %    it under the terms of the GNU General Public License as published by
@@ -50,6 +50,22 @@ function values_vec = rationality_measures_from_graph(vertex_to_index, neighbors
 %     The minimum cost of removals of edges to make the graph acyclical 
 %     when the costs of removals are raised to the power of p. The minimum 
 %     cost is normalized by the number of vertices.
+%
+%     If power_vec(j) == 0:
+%       values_vec(3*j + 1): Varian's index of degree 0:
+%       As before but the total cost of removals is the number of 
+%       positive e_ts + the geometric average of the positive e_ts 
+%       normalized by the number of observations. 
+%  
+%       values_vec(3*j + 2): Inverse Varian's index of degree 0: 
+%       As before but the total cost of removals is the number of positive 
+%       e_ts + the geometric average of the positive e_ts normalized by 
+%       the number of observations. 
+%  
+%       values_vec(3*j + 3): Normalized minimum cost index of degree 0: 
+%       As before but total cost of removals is the number of positive 
+%       removals + the geometric average of the removals. 
+
 
 % Variables:
 %   component: The index of the non-trivial strong component for each 
@@ -72,6 +88,9 @@ no_other_measures = 3;
     
 % Container for the measures of rationality values
 values_vec = zeros(1,size(power_vec,2) * no_variations_measures + no_other_measures);
+
+% Container for integer part of 0 degree measures
+values_vec_2 = zeros(1,size(power_vec,2) * no_variations_measures + no_other_measures);
 
 % Check if any cycles. 
 cycle_flag = dfs_cycle_search(neighbors,vertex_to_index);
@@ -158,7 +177,7 @@ if (cycle_flag)
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         
         % Start the cycle search by two-cycles.
-        [cycles_two, cycle_sizes_two] = two_cycles_search(neighbors_comp,vertex_to_index_comp);
+        [cycles_two, cycle_sizes_two] = two_cycles_search(neighbors_comp,vertex_to_index_comp,weights_comp);
 		
 		% Use the previously found cycles with all the future powers
         cycles_varian = cycles_two;
@@ -167,17 +186,40 @@ if (cycle_flag)
         cycles_invvarian = cycles_two;
         cycle_sizes_invvarian = cycle_sizes_two;
         
+        
         % Calculate Varian's index in the subgraph
         for i = 1:size(power_vec,2)
             power = power_vec(i);
+            if (power ~= 0)
             [value, cycles_varian, cycle_sizes_varian] = calculate_varian(neighbors_comp, vertex_to_index_comp, weights_comp, power, cycles_varian, cycle_sizes_varian);
+            else
+                %Calculate min number of removals by power 0 index
+                [value_strict, ~, ~] = calculate_varian(neighbors_comp, vertex_to_index_comp, weights_comp, 0, cycles_varian, cycle_sizes_varian);
+                %Calculate min number of removals + geometric average
+                [value_log, ~, ~] = calculate_varian_geom_avg(neighbors_comp, vertex_to_index_comp, weights_comp, cycles_varian, cycle_sizes_varian, round(value_strict));
+                %Save the value for the integer part
+                values_vec_2((i - 1) * no_variations_measures + varian_index) = values_vec_2((i - 1) * no_variations_measures + varian_index) + value_strict;
+                %Save the sum of log values                
+                value = value_log;                
+            end            
             values_vec((i - 1) * no_variations_measures + varian_index) = values_vec((i - 1) * no_variations_measures + varian_index) + value;
         end
         
         % Calculate InvVarian index in the subgraph
         for i = 1:size(power_vec,2)
             power = power_vec(i);
-            [value, cycles_invvarian, cycle_sizes_invvarian] = calculate_invvarian(neighbors_comp, vertex_to_index_comp, weights_comp, power, cycles_invvarian, cycle_sizes_invvarian);
+            if (power ~= 0)
+                [value, cycles_invvarian, cycle_sizes_invvarian] = calculate_invvarian(neighbors_comp, vertex_to_index_comp, weights_comp, power, cycles_invvarian, cycle_sizes_invvarian);
+            else
+                %Calculate min number of removals by power 0 index
+                [value_strict, ~, ~] = calculate_invvarian(neighbors_comp, vertex_to_index_comp, weights_comp, 0, cycles_invvarian, cycle_sizes_invvarian);
+                %Calculate min number of removals + geometric average
+                [value_log, ~, ~] = calculate_invvarian_geom_avg(neighbors_comp, vertex_to_index_comp, weights_comp, cycles_invvarian, cycle_sizes_invvarian, round(value_strict));
+                %Save the value for the integer part
+                values_vec_2((i - 1) * no_variations_measures + invvarian_index) = values_vec_2((i - 1) * no_variations_measures + invvarian_index) + value_strict;                
+                %Save the sum of log values                
+                value = value_log;            
+            end
             values_vec((i - 1) * no_variations_measures + invvarian_index) = values_vec((i - 1) * no_variations_measures + invvarian_index) + value;
         end
         
@@ -187,7 +229,18 @@ if (cycle_flag)
         cycle_sizes_nmci = cycle_sizes_varian;
         for i = 1:size(power_vec,2)
             power = power_vec(i);
-            [value, cycles_nmci, cycle_sizes_nmci] = calculate_nmci(neighbors_comp, vertex_to_index_comp, weights_comp, power, cycles_nmci, cycle_sizes_nmci);
+            if (power ~= 0)            
+                [value, cycles_nmci, cycle_sizes_nmci] = calculate_nmci(neighbors_comp, vertex_to_index_comp, weights_comp, power, cycles_nmci, cycle_sizes_nmci);
+            else
+                %Calculate min number of removals by power 0 index
+                [value_strict, ~, ~] = calculate_nmci(neighbors_comp, vertex_to_index_comp, weights_comp, 0, cycles_nmci, cycle_sizes_nmci);
+                %Calculate min number of removals + geometric average
+                [value_log, ~, ~] = calculate_nmci_geom_avg(neighbors_comp, vertex_to_index_comp, weights_comp, cycles_nmci, cycle_sizes_nmci, value_strict);
+                %Save the value for the integer part
+                values_vec_2((i - 1) * no_variations_measures + nmci_index) = values_vec_2((i - 1) * no_variations_measures + nmci_index) + value_strict;       
+                %Save the sum of log values
+                value = value_log;
+            end                  
             values_vec((i - 1) * no_variations_measures + nmci_index) = values_vec((i - 1) * no_variations_measures + nmci_index) + value;
         end
         
@@ -220,6 +273,19 @@ if (cycle_flag)
        [value, ~, ~] = calculate_swaps(neighbors_comp, vertex_to_index_comp, weights_comp, cycles_swaps, cycle_sizes_swaps);
        values_vec(swaps_index) = values_vec(swaps_index) + value;
     end % For each component
+    
+    % If have measures of order zero, then transform them to strict removals
+    % + geometric average form
+    if(~all(power))
+        zero_power_ind = find(power == 0);
+        for i=zero_power_ind
+            for j=[varian_index,invvarian_index,nmci_index]
+                if (values_vec_2((i - 1) * no_variations_measures + j) > 0)
+                    values_vec((i - 1) * no_variations_measures + j) = values_vec_2((i - 1) * no_variations_measures + j) + exp(values_vec((i - 1) * no_variations_measures + j))^(1/values_vec_2((i - 1) * no_variations_measures + j));
+                end
+            end
+        end
+    end   
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Normalize the measures by the number of periods %%

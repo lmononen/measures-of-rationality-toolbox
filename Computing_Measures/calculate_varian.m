@@ -92,8 +92,8 @@ function [value, cycles_in, cycle_sizes_in] = calculate_varian(neighbors,...
     % Constraint matrix for the programming problem
     constraint_matrix=zeros(0,size(neighbors,2));
     
-    % Initialize null removals
-    removals_full = false(1,size(neighbors,2));
+    % Initialize removals of zero trades
+    removals_full = (weights == 0);
     weights_dfs = weights;
 
     % Iteratively find new critical cycles and do optimal removals until removed all of the cycles
@@ -134,6 +134,9 @@ function [value, cycles_in, cycle_sizes_in] = calculate_varian(neighbors,...
             % Find the induced edge removals from removing all the less
             % expensive out-edges
             removals_full = removals_reduction_varian(index_to_ordered_index, ordered_index_to_index, X_first, removals);
+                       
+            % Add removals of zero trades
+            removals_full(weights == 0) = true;
 
         end %(!cycles.empty())
         % Debug % In case of non-convergence pause. 

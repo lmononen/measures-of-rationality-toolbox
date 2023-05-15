@@ -1,12 +1,12 @@
-%    two_cycles_search - Rationality_Measures Copyright (C) 2022  Lasse Mononen
+%    two_cycles_search - Rationality_Measures Copyright (C) 2023  Lasse Mononen
 %
 %    This program is free software: you can redistribute it and/or modify
 %    it under the terms of the GNU General Public License as published by
 %    the Free Software Foundation, either version 3 of the License, or
 %    (at your option) any later version.
 
-function [cycles,cycle_sizes] = two_cycles_search(neighbors,vertex_to_index)
-% A brute-force algorithm for searching for all cycles of length 1 or 2. 
+function [cycles,cycle_sizes] = two_cycles_search(neighbors,vertex_to_index,weights)
+% A brute-force algorithm for searching for all strict cycles of length 1 or 2. 
 % Checks all paths of length 2 for cycles where move up in vertex
 % indices in the first edge of the cycle.
 
@@ -42,8 +42,10 @@ function [cycles,cycle_sizes] = two_cycles_search(neighbors,vertex_to_index)
                 % Search if can get from v to s
                 cycles_j = vertex_to_index(v) - 1 + uint32(find(neighbors(vertex_to_index(v):(vertex_to_index(v + 1) - 1)) == s));
                 if (~isempty(cycles_j)) % Can find at most one index 
-                    cycles = [cycles, i, cycles_j];
-                    cycle_sizes = [cycle_sizes, 2];
+                    if ((weights(cycles_j) > 0) && (weights(i) > 0)) % Skip if zero trade                    
+                        cycles = [cycles, i, cycles_j];
+                        cycle_sizes = [cycle_sizes, 2];
+                    end
                 end
             end
         end

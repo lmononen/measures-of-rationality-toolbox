@@ -1,20 +1,22 @@
-%    calculate_invvarian - Rationality_Measures Copyright (C) 2022  Lasse Mononen
+%    calculate_invvarian_geom_avg - Rationality_Measures Copyright (C) 2023  Lasse Mononen
 %
 %    This program is free software: you can redistribute it and/or modify
 %    it under the terms of the GNU General Public License as published by
 %    the Free Software Foundation, either version 3 of the License, or
 %    (at your option) any later version.
 
-function [value, cycles_in, cycle_sizes_in] = calculate_invvarian(neighbors, ...
-     vertex_to_index, weights, power, cycles_in, cycle_sizes_in)
-% Non-normalized inverse Varian's index of order p: The minimum cost of removals of in-edges
+function [value, cycles_in, cycle_sizes_in] = calculate_invvarian_geom_avg(neighbors, ...
+     vertex_to_index, weights, cycles_in, cycle_sizes_in, max_removals)
+% Non-normalized inverse Varian's index of order 0: The minimum cost of removals of in-edges
 % for each vertex to make the graph acyclical when removing in-edges at cost
 % e_t at the vertex t removes all the in-edges to the vertex with a cost 
-% lower than e_t. Additionally, the costs are raised to the power of p. 
+% lower than e_t. The total cost of removals is the number of  positive 
+% e_ts + the geometric average of the positive e_ts. This function returns
+% sum of log(e_t)s for the positive optimal e_ts.
 %
-% Calculates non-normalized inverse Varian's index of order p for the graph 
-% given by neighbors, vertex_to_index, and weights starting from the set of 
-% critical cycles given by cycles_in, cycle_sizes_in. 
+% Finds the optimal removals for non-normalized Varian's index of order 0 for 
+% the graph given by neighbors, vertex_to_index, and weights starting from 
+% the set of  critical cycles given by cycles_in, cycle_sizes_in. 
 % The index is calculated iteratively by finding the optimal levels of
 % in-edge removals e_t to remove all the current critical cycles and then 
 % checking if there are any other critical cycles that the removals missed 
@@ -26,7 +28,8 @@ function [value, cycles_in, cycle_sizes_in] = calculate_invvarian(neighbors, ...
 %     vertex_to_index(v+1)-1 give the out-edges for the vertex v.
 %     neighbors(i): The in-vertex of the edge i. 
 %     weight(i): The weight of the edge i. 
-%   power: The power order of inverse Varian's index. 
+%   max_removals: The value of the strict Houtman-Maks index i.e. the minimum
+%   number of removals to break all the strict cycles. 
 %   The starting set of critical cycles represented by cycles_in: vector of edge
 %   indices in the cycles and by cycle_sizes_in: vector of cycle lengths.
 
@@ -50,7 +53,7 @@ function [value, cycles_in, cycle_sizes_in] = calculate_invvarian(neighbors, ...
 %   weight of the edge that the e_t is set at 
 %   removals_full: The induced removals in the graph from removing in-edges at
 %   levels e_t.
-%   value: Optimal cost of removals.
+%   value: The sum of logarithm of the positive optimal removals
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %% Reorder relations so that removing relations corresponds to
@@ -94,6 +97,11 @@ function [value, cycles_in, cycle_sizes_in] = calculate_invvarian(neighbors, ...
     
     iteration_counter = 0; 
     
+    %Log weights
+    log_weights = weights;
+    log_weights(log_weights == 0) = 1;
+    log_weights = log(log_weights);    
+    
     % Constraint matrix for the programming problem
     constraint_matrix=zeros(0,size(neighbors,2));
     
@@ -127,8 +135,9 @@ function [value, cycles_in, cycle_sizes_in] = calculate_invvarian(neighbors, ...
             constraint_matrix = min_const_matrix_invvarian(neighbors, index_to_ordered_index, ordered_index_to_index, ordered_vertex_to_index, cycles, cycle_sizes, constraint_matrix);
             
             % Find the optimal method to remove the new found cycles and all
-            % the previous cycles 
-            [removals,value] = find_removals(weights, constraint_matrix, power);
+            % the previous cycles when at most max_removals removals are
+            % done
+            [removals,value] = find_removals_max_removals(log_weights, constraint_matrix, max_removals);
             
             % Calculate the additional cost of removing each relation from
             % the current optimal solution             
