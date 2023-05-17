@@ -77,7 +77,7 @@ Varian's goodness-of-fit of degree $\alpha$ (Varian, 1990; Mononen, 2023) for $\
 $$\inf_{(e_t)\in[0,1]^T}\frac{1}{T}\sum_{t=1}^T e_t^\alpha\text{ such that }(\mathop{\text{R}^{(e_t)}},\mathop{\text{P}^{(e_t)}}) \text{ is acyclical.}$$
 
 Varian's goodness-of-fit of degree $0$ (Mononen, 2023) is 
-$$\inf_{(e_{t})\in[0,1]^T}\frac{1}{T}\bigg(|\\{t|e_{t}>0\\}| + \Big(\prod_{t|e_{t}>0} e_{t} \Big)^{|\\{t|e_{t}>0\\}|}\bigg)\text{ such that }\mathop{\text{P}^{(e_{t})}} \text{ is acyclical.}$$
+$$\inf_{(e_{t})\in[0,1]^T}\frac{1}{T}\bigg(|\\{t|e_{t}>0\\}| + \Big(\prod_{t|e_{t}>0} e_{t} \Big)^{\frac{1}{|\\{t|e_{t}>0\\}|}}\bigg)\text{ such that }\mathop{\text{P}^{(e_{t})}} \text{ is acyclical.}$$
 
 #### Inverse Varian's Goodness-of-Fit of Degree $\alpha$
 
@@ -89,7 +89,7 @@ Inverse Varian's goodness-of-fit of degree $\alpha$ (Mononen, 2023) for $\alpha>
 $$\inf_{(e_{t^\prime})\in[0,1]^T}\frac{1}{T}\sum_{t^\prime=1}^T e_{t^\prime}^\alpha\text{ such that }(\mathop{\text{R}^{(e_{t^\prime})}},\mathop{\text{P}^{(e_{t^\prime})}}) \text{ is acyclical.}$$
 
 Inverse Varian's goodness-of-fit of degree $0$ (Mononen, 2023) is 
-$$\inf_{(e_{t^\prime})\in[0,1]^T}\frac{1}{T}\bigg(|\\{t^\prime|e_{t^\prime}>0\\}| + \Big(\prod_{t^\prime|e_{t^\prime}>0} e_{t^\prime} \Big)^{|\\{t^\prime|e_{t^\prime}>0\\}|}\bigg)\text{ such that }\mathop{\text{P}^{(e_{t^\prime})}} \text{ is acyclical.}$$
+$$\inf_{(e_{t^\prime})\in[0,1]^T}\frac{1}{T}\bigg(|\\{t^\prime|e_{t^\prime}>0\\}| + \Big(\prod_{t^\prime|e_{t^\prime}>0} e_{t^\prime} \Big)^{\frac{1}{|\\{t^\prime|e_{t^\prime}>0\\}|}}\bigg)\text{ such that }\mathop{\text{P}^{(e_{t^\prime})}} \text{ is acyclical.}$$
 
 #### Normalized Minimum Cost Index of Degree $\alpha$
 
@@ -101,7 +101,7 @@ Normalized minimum cost index of degree $\alpha$ (Mononen, 2023) for $\alpha>0$ 
 $$\inf_{(e_{t,t^\prime})\in[0,1]^T}\frac{1}{T}\sum_{t=1}^T\sum_{t^\prime=1}^T e_{t,t^\prime}^\alpha\text{ such that }(\mathop{\text{R}^{(e_{t,t^\prime})}},\mathop{\text{P}^{(e_{t,t^\prime})}}) \text{ is acyclical.}$$
 
 Normalized minimum cost index of degree $0$ (Mononen, 2023) is 
-$$\inf_{(e_{t,t^\prime})\in[0,1]^T}\frac{1}{T}\bigg(|\\{(t,t^\prime)|e_{t,t^\prime}>0\\}| + \Big(\prod_{(t,t^\prime)|e_{t,t^\prime}>0} e_{t,t^\prime} \Big)^{|\\{(t,t^\prime)|e_{t,t^\prime}>0\\}|}\bigg)\text{ such that }\mathop{\text{P}^{(e_{t,t^\prime})}} \text{ is acyclical.}$$
+$$\inf_{(e_{t,t^\prime})\in[0,1]^T}\frac{1}{T}\bigg(|\\{(t,t^\prime)|e_{t,t^\prime}>0\\}| + \Big(\prod_{(t,t^\prime)|e_{t,t^\prime}>0} e_{t,t^\prime} \Big)^{\frac{1}{|\\{(t,t^\prime)|e_{t,t^\prime}>0\\}|}}\bigg)\text{ such that }\mathop{\text{P}^{(e_{t,t^\prime})}} \text{ is acyclical.}$$
 
 ### Measures of Rationality for Rationalization with Symmetric Utility
 
@@ -119,7 +119,7 @@ Using these symmetrically extended revealed preferences and their acyclicality, 
 
 ####  Afriat's Efficiency Index with Symmetric Utility
 
-For a common adjustment factor $e\in[0,1]$, define the relaxed revealed preference $(\mathop{\text{R}^{e}}\_{\mathop{\text{S}}},\mathop{\text{P}^{e}}\_{\mathop{\text{S}}})$ by for all  $t, t^\prime$ and permutations $\pi$ as  
+For a common adjustment factor $e\in[0,1]$, define the relaxed revealed preference $(\mathop{\text{R}^{e}\_{\text{S}}},\mathop{\text{P}^{e}\_{\text{S}}})$ by for all  $t, t^\prime$ and permutations $\pi$ as  
 $$x\_{t}\mathrel{\text{R}^{e}\_{\text{S}}}\pi(x\_{t^\prime})\iff (1-e)p\_t\cdot x\_t\geq p\_t\cdot \pi(x\_{t^\prime})\mathrlap{\text{ or } t=t^\prime}$$
 $$x\_{t}\mathrel{\text{P}^{e}\_{\text{S}}}\pi(x\_{t^\prime})\iff (1-e)p\_t\cdot x\_t   > p\_t\cdot \pi(x\_{t^\prime})\mathrlap{.}$$
 
@@ -133,14 +133,14 @@ $$\inf\_{B\subseteq T}\frac{1}{T}|B|\text{ such that } (p\_i,x\_i)\_{i\in\\{1,\d
 
 #### Swaps Index with Symmetric Utility
 
-Swaps index with symmetric utility is $\inf\_{B\subseteq \mathop{\text{R}\_{\mathop{\text{S}}}}}\frac{1}{T}|B|$  such that by defining for all  $t, t^\prime$ with $(t,t^\prime)\notin B$ and permutations $\pi$ 
+Swaps index with symmetric utility is $\inf\_{B\subseteq \mathop{\text{R}\_{\text{S}}}}\frac{1}{T}|B|$  such that by defining for all  $t, t^\prime$ with $(t,t^\prime)\notin B$ and permutations $\pi$ 
 $$x\_{t}\mathrel{\text{R}^{B}\_{\text{S}}}\pi(x\_{t^\prime})\iff (1-e)p\_t\cdot x\_t\geq p\_t\cdot \pi(x\_{t^\prime})\mathrlap{\text{ or } t=t^\prime}$$
 $$x\_{t}\mathrel{\text{P}^{B}\_{\text{S}}}\pi(x\_{t^\prime})\iff (1-e)p\_t\cdot x\_t   > p\_t\cdot \pi(x\_{t^\prime})$$
 $(\mathop{\text{R}^{B}\_{\text{S}}},\mathop{\text{P}^{B}\_{\text{S}}})$ is acyclical. 
 
 #### Varian's Goodness-of-Fit of Degree $\alpha$ with Symmetric Utility
 
-For observation specific adjustment factors $(e\_t)\in[0,1]^T$, define the relaxed revealed preference $(\mathop{\text{R}^{(e\_t)}}\_{\mathop{\text{S}}},\mathop{\text{P}^{(e\_t)}}\_{\mathop{\text{S}}})$  by for all  $t, t^\prime$ and permutations $\pi$ as  
+For observation specific adjustment factors $(e\_t)\in[0,1]^T$, define the relaxed revealed preference $(\mathop{\text{R}^{(e\_t)}\_{\text{S}}},\mathop{\text{P}^{(e\_t)}\_{\text{S}}})$  by for all  $t, t^\prime$ and permutations $\pi$ as  
 $$x\_{t}\mathrel{\text{R}^{(e\_t)}\_{\text{S}}}\pi(x\_{t^\prime})\iff (1-e\_t)p\_t\cdot x\_t\geq p\_t\cdot \pi(x\_{t^\prime})\mathrlap{\text{ or } t=t^\prime}$$
 $$x\_{t}\mathrel{\text{P}^{(e\_t)}\_{\text{S}}}\pi(x\_{t^\prime})\iff (1-e\_t)p\_t\cdot x\_t   > p\_t\cdot \pi(x\_{t^\prime})\mathrlap{.}$$
 
@@ -148,11 +148,11 @@ Varian's goodness-of-fit of degree $\alpha$ with symmetric utility for $\alpha>0
 $$\inf\_{(e\_t)\in[0,1]^T}\frac{1}{T}\sum\_{t=1}^T e\_t^\alpha\text{ such that }(\mathop{\text{R}^{(e\_t)}\_{\text{S}}},\mathop{\text{P}^{(e\_t)}\_{\text{S}}}) \text{ is acyclical.}$$
 
 Varian's goodness-of-fit of degree $0$ with symmetric utility is 
-$$\inf_{(e_{t})\in[0,1]^T}\frac{1}{T}\bigg(|\\{t|e_{t}>0\\}| + \Big(\prod_{t|e_{t}>0} e_{t} \Big)^{|\\{t|e_{t}>0\\}|}\bigg)\text{ such that }\mathop{\text{P}^{(e\_t)}\_{\text{S}}} \text{ is acyclical.}$$
+$$\inf_{(e_{t})\in[0,1]^T}\frac{1}{T}\bigg(|\\{t|e_{t}>0\\}| + \Big(\prod_{t|e_{t}>0} e_{t} \Big)^{\frac{1}{|\\{t|e_{t}>0\\}|}}\bigg)\text{ such that }\mathop{\text{P}^{(e\_t)}\_{\text{S}}} \text{ is acyclical.}$$
 
 #### Inverse Varian's Goodness-of-Fit of Degree $\alpha$ with Symmetric Utility
 
-For observation specific adjustment factors $(e\_{t^\prime})\in[0,1]^T$, define the relaxed revealed preference $(\mathop{\text{R}^{(e\_{t^\prime})}}\_{\mathop{\text{S}}},\mathop{\text{P}^{(e\_{t^\prime})}}\_{\mathop{\text{S}}})$  by for all  $t, t^\prime$ and permutations $\pi$ as  
+For observation specific adjustment factors $(e\_{t^\prime})\in[0,1]^T$, define the relaxed revealed preference $(\mathop{\text{R}^{(e\_{t^\prime})}\_{\text{S}}},\mathop{\text{P}^{(e\_{t^\prime})}\_{\text{S}}})$  by for all  $t, t^\prime$ and permutations $\pi$ as  
 $$x\_{t}\mathrel{\text{R}^{(e\_{t^\prime})}\_{\text{S}}}\pi(x\_{t^\prime})\iff p\_t\cdot x\_t\geq (1-e\_{t^\prime})p\_t\cdot \pi(x\_{t^\prime})\mathrlap{\text{ or } t=t^\prime}$$
 $$x\_{t}\mathrel{\text{P}^{(e\_{t^\prime})}\_{\text{S}}}\pi(x\_{t^\prime})\iff p\_t\cdot x\_t   > (1-e\_{t^\prime})p\_t\cdot \pi(x\_{t^\prime})\mathrlap{.}$$
 
@@ -160,11 +160,11 @@ Inverse Varian's goodness-of-fit of degree $\alpha$ with symmetric utility for $
 $$\inf\_{(e\_{t^\prime})\in[0,1]^T}\frac{1}{T}\sum\_{t^\prime=1}^T e\_{t^\prime}^\alpha\text{ such that }(\mathop{\text{R}^{(e\_{t^\prime})}\_{\text{S}}},\mathop{\text{P}^{(e\_{t^\prime})}\_{\text{S}}}) \text{ is acyclical.}$$
 
 Inverse Varian's goodness-of-fit of degree $0$ with symmetric utility is 
-$$\inf_{(e_{t^\prime})\in[0,1]^T}\frac{1}{T}\bigg(|\\{t^\prime|e_{t^\prime}>0\\}| + \Big(\prod_{t^\prime|e_{t^\prime}>0} e_{t^\prime} \Big)^{|\\{t^\prime|e_{t^\prime}>0\\}|}\bigg)\text{ such that }\mathop{\text{P}^{(e_{t^\prime})}\_{\text{S}}} \text{ is acyclical.}$$
+$$\inf_{(e_{t^\prime})\in[0,1]^T}\frac{1}{T}\bigg(|\\{t^\prime|e_{t^\prime}>0\\}| + \Big(\prod_{t^\prime|e_{t^\prime}>0} e_{t^\prime} \Big)^{\frac{1}{|\\{t^\prime|e_{t^\prime}>0\\}|}}\bigg)\text{ such that }\mathop{\text{P}^{(e_{t^\prime})}\_{\text{S}}} \text{ is acyclical.}$$
 
 #### Normalized Minimum Cost Index of Degree $\alpha$ with Symmetric Utility
 
-For relation specific adjustment factors $(e\_{t,t^\prime})\in[0,1]^{T\times T}$, define the relaxed revealed preference $(\mathop{\text{R}^{(e\_{t,t^\prime})}}\_{\mathop{\text{S}}},\mathop{\text{P}^{(e\_{t,t^\prime})}}\_{\mathop{\text{S}}})$  by for all  $t, t^\prime$ and permutations $\pi$ as  
+For relation specific adjustment factors $(e\_{t,t^\prime})\in[0,1]^{T\times T}$, define the relaxed revealed preference $(\mathop{\text{R}^{(e\_{t,t^\prime})}\_{\text{S}}},\mathop{\text{P}^{(e\_{t,t^\prime})}\_{\text{S}}})$  by for all  $t, t^\prime$ and permutations $\pi$ as  
 $$x\_{t}\mathrel{\text{R}^{(e\_{t,t^\prime})}\_{\text{S}}}\pi(x\_{t^\prime})\iff (1-e\_{t,t^\prime})p\_t\cdot x\_t\geq p\_t\cdot \pi(x\_{t^\prime})\mathrlap{\text{ or } t=t^\prime}$$
 $$x\_{t}\mathrel{\text{P}^{(e\_{t,t^\prime})}\_{\text{S}}}\pi(x\_{t^\prime})\iff (1-e\_{t,t^\prime})p\_t\cdot x\_t   > p\_t\cdot \pi(x\_{t^\prime})\mathrlap{.}$$
 
@@ -172,7 +172,7 @@ Normalized minimum cost index of degree $\alpha$ with symmetric utility for $\al
 $$\inf\_{(e\_{t,t^\prime})\in[0,1]^{T\times T}}\frac{1}{T}\sum\_{t=1}^T\sum\_{t^\prime=1}^T e\_{t,t^\prime}^\alpha\text{ such that }(\mathop{\text{R}^{(e\_{t,t^\prime})}\_{\text{S}}},\mathop{\text{P}^{(e\_{t,t^\prime})}\_{\text{S}}}) \text{ is acyclical.}$$
 
 Normalized minimum cost index of degree $0$ with symmetric utility is 
-$$\inf_{(e_{t,t^\prime})\in[0,1]^T}\frac{1}{T}\bigg(|\\{(t,t^\prime)|e_{t,t^\prime}>0\\}| + \Big(\prod_{(t,t^\prime)|e_{t,t^\prime}>0} e_{t,t^\prime} \Big)^{|\\{(t,t^\prime)|e_{t,t^\prime}>0\\}|}\bigg)\text{ such that }\mathop{\text{P}^{(e_{t,t^\prime})}\_{\text{S}}} \text{ is acyclical.}$$
+$$\inf_{(e_{t,t^\prime})\in[0,1]^T}\frac{1}{T}\bigg(|\\{(t,t^\prime)|e_{t,t^\prime}>0\\}| + \Big(\prod_{(t,t^\prime)|e_{t,t^\prime}>0} e_{t,t^\prime} \Big)^{\frac{1}{|\\{(t,t^\prime)|e_{t,t^\prime}>0\\}|}}\bigg)\text{ such that }\mathop{\text{P}^{(e_{t,t^\prime})}\_{\text{S}}} \text{ is acyclical.}$$
 
 ### Statistical Significance of Rationality Measures
 
