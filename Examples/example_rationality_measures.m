@@ -35,5 +35,9 @@ Varians_index0_5 = rat_measures_values(7);
 InvVarians_index0_5 = rat_measures_values(8);
 NMCI0_5 = rat_measures_values(9);
 
+% Calculate money pump indices for the data
+money_pump_values = money_pump_index(P, Q);
 
-
+money_pump_index_value = money_pump_values(1); 
+normalized_money_pump_index_value = money_pump_values(2); 
+no_of_cycles = money_pump_values(3); 

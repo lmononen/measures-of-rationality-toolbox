@@ -1,18 +1,17 @@
-%    statistical_significance - Rationality_Measures Copyright (C) 2022  Lasse Mononen
+%    percentile_score - Rationality_Measures Copyright (C) 2022  Lasse Mononen
 %
 %    This program is free software: you can redistribute it and/or modify
 %    it under the terms of the GNU General Public License as published by
 %    the Free Software Foundation, either version 3 of the License, or
 %    (at your option) any later version.
 
-function [prob_more_rational_than_random, prob_less_rational_than_random, prob_random_satisfies_garp] = statistical_significance(P, Q, power_vec, sample_size)
+function [prob_strictly_less_rational_than_random, prob_weakly_less_rational_than_random, prob_random_satisfies_garp] = percentile_score(P, Q, power_vec, sample_size)    
 % Compares the measure of rationality from the data to the measure of 
 % rationality of choosing uniformly randomly on the budget line. This gives
-% the probability that the data has a lower or higher measure of rationality 
-% than choosing randomly. 
-% This provides a statistical test for the significance of rationality 
-% violations as in Mononen (2022) "Computing and Comparing Measure of
-% Rationality". 
+% the probability that the data has a strictly or weakly higher measure of 
+% rationality than choosing randomly. 
+% This provides a predictive power adjustment for the measures of 
+% rationality following Dean and Martin (2016). 
 
 % Input:
 %   P: A matrix of prices where the rows index goods and the columns index
@@ -27,12 +26,12 @@ function [prob_more_rational_than_random, prob_less_rational_than_random, prob_r
 %   probabilities. 
 
 % Output:
-%   prob_more_rational_than_random: For each measure of rationality, 
-%   the probability that the data has a lower measure of rationality than 
-%   choosing uniformly on the budget line.
-%   prob_less_rational_than_random: For each measure of rationality, 
-%   the probability that the data has a higher measure of rationality than 
-%   choosing uniformly on the budget line.
+%   prob_strictly_less_rational_than_random: For each measure of rationality, 
+%   the probability that the data has a strictly higher measure of rationality 
+%   than choosing uniformly on the budget line.
+%   prob_weakly_less_rational_than_random: For each measure of rationality, 
+%   the probability that the data has a weakly higher measure of rationality 
+%   than choosing uniformly on the budget line.
 %   prob_random_satisfies_garp: Probability that uniform choices on the
 %   budget line satisfy GARP.
 
@@ -58,8 +57,8 @@ cardinal_measures = [1,4:total_no_measures];
 
 % Counter for tracking how often simulated choices have a strictly lower 
 % and higher measure than the observed data
-data_more_rational_than_simulation = zeros(1,total_no_measures);
-data_less_rational_than_simulation = zeros(1,total_no_measures);
+data_strictly_less_rational_than_simulation = zeros(1,total_no_measures);
+data_weakly_less_rational_than_simulation = zeros(1,total_no_measures);
 
 % Counter for how many of the simulations satisfy GARP
 simulation_satisfies_garp = 0;
@@ -94,30 +93,30 @@ parfor s = 1:sample_size
     % probability
     simulation_satisfies_garp = simulation_satisfies_garp + data_rationalizable(P, simQ);
     
-    data_more_rational_than_simulation_temp = zeros(1,total_no_measures);
-    data_less_rational_than_simulation_temp = zeros(1,total_no_measures);
+    data_strictly_less_rational_than_simulation_temp = zeros(1,total_no_measures);
+    data_weakly_less_rational_than_simulation_temp = zeros(1,total_no_measures);
     
     %Check if the simulated choices have a lower or higher measure of rationality    
-    data_more_rational_than_simulation_temp(cardinal_measures) = (measures_sim(cardinal_measures) > measure_data(cardinal_measures));
-    data_less_rational_than_simulation_temp(cardinal_measures) = (measures_sim(cardinal_measures) < measure_data(cardinal_measures));
+    data_strictly_less_rational_than_simulation_temp(cardinal_measures) = (measures_sim(cardinal_measures) < measure_data(cardinal_measures));
+    data_weakly_less_rational_than_simulation_temp(cardinal_measures) = (measures_sim(cardinal_measures) <= measure_data(cardinal_measures));
     
     
     % For ordinal indices values integer so use rounding to get rid of
     % precision problems
-    data_more_rational_than_simulation_temp(ordinal_measures) = (round(measures_sim(ordinal_measures)) > round(measure_data(ordinal_measures)));
-    data_less_rational_than_simulation_temp(ordinal_measures) = (round(measures_sim(ordinal_measures)) < round(measure_data(ordinal_measures)));
+    data_strictly_less_rational_than_simulation_temp(ordinal_measures) = (round(measures_sim(ordinal_measures)) < round(measure_data(ordinal_measures)));
+    data_weakly_less_rational_than_simulation_temp(ordinal_measures) = (round(measures_sim(ordinal_measures)) <= round(measure_data(ordinal_measures)));
     
     % Update the counters    
-    data_more_rational_than_simulation = data_more_rational_than_simulation + data_more_rational_than_simulation_temp;
-    data_less_rational_than_simulation = data_less_rational_than_simulation + data_less_rational_than_simulation_temp;    
+    data_strictly_less_rational_than_simulation = data_strictly_less_rational_than_simulation + data_strictly_less_rational_than_simulation_temp;
+    data_weakly_less_rational_than_simulation = data_weakly_less_rational_than_simulation + data_weakly_less_rational_than_simulation_temp;    
    
 end
 
 % Transform the counters to fractions that give the probability that
-% simulated choices have a strictly lower or higher measure of rationality
+% simulated choices have a strictly or weakly lower measure of rationality
 % than the observed data
-prob_more_rational_than_random = double(data_more_rational_than_simulation) / sample_size;
-prob_less_rational_than_random = double(data_less_rational_than_simulation) / sample_size;
+prob_strictly_less_rational_than_random = double(data_strictly_less_rational_than_simulation) / sample_size;
+prob_weakly_less_rational_than_random = double(data_weakly_less_rational_than_simulation) / sample_size;
 
 % Calculate the probability that random choice satisfies garp
 prob_random_satisfies_garp = double(simulation_satisfies_garp) / sample_size;

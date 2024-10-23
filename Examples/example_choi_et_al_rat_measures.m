@@ -79,6 +79,7 @@ total_no_measure = max(size(power_vec)) * no_measure_variations + no_other_measu
 % Create the storage files storing measures of rationality values	
 rat_measures_values=zeros(agents,total_no_measure);    
 rat_measures_fosd_values=zeros(agents,total_no_measure);    
+money_pump_indices_values=zeros(agents,3);    
 
 % Calculate the measures of rationality for each agent in parallel
 parfor i=1:agents
@@ -87,6 +88,16 @@ parfor i=1:agents
     rat_measures_values(i,:)=rationality_measures(P, Q, power_vec);
     rat_measures_fosd_values(i,:)=rationality_measures_symmetric(P, Q, power_vec);    
 end 
+
+% Calculate the money pump indices for each agent in parallel
+% Due to the number of choice cycles in the data this is unusably slow to
+% calculate in this application. 
+% parfor i=1:agents
+%     i
+%     P=squeeze(agentP(i,:,:));
+%     Q=squeeze(agentQ(i,:,:));    
+%     money_pump_indices_values(i,:)=money_pump_index(P, Q);
+% end 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Create the output file %%

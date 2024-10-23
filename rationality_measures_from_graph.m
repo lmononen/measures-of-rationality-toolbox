@@ -276,8 +276,8 @@ if (cycle_flag)
     
     % If have measures of order zero, then transform them to strict removals
     % + geometric average form
-    if(~all(power))
-        zero_power_ind = find(power == 0);
+    if(~all(power_vec))
+        zero_power_ind = find(power_vec == 0);
         for i=zero_power_ind
             for j=[varian_index,invvarian_index,nmci_index]
                 if (values_vec_2((i - 1) * no_variations_measures + j) > 0)
