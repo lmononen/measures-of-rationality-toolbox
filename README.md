@@ -372,7 +372,7 @@ Afriat, Sydney N. (1972). Efficiency estimation of production functions. *Intern
 
 Apesteguia, Jose and Ballester, Miguel (2015). A measure of rationality and welfare. *Journal of Political Economy* 123(6), pp. 1278–1310.
 
-Echenique, Federico; Lee, Sangmok, and Shum Matthew (2011) *The Money Pump as a Measure of Revealed Preference Violations*, 119(6), pp. 1201-1223.
+Echenique, Federico; Lee, Sangmok, and Shum, Matthew (2011). The money pump as a measure of revealed preference violations. *Journal of Political Economy* 119(6), pp. 1201–1223.
 
 Chambers, Christopher P. and Rehbeck, John (2018). Note on symmetric utility. *Economics Letters* 162, pp. 27-29.
 
